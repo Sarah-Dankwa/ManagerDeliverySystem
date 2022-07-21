@@ -18,7 +18,6 @@ public Driver(String firstName, String surname) {
 }
 
 
-
 @Override
 public String toString() {
 	return "Driver [driverID=" + driverID + ", firstName=" + firstName + ", surname=" + surname + "]";
