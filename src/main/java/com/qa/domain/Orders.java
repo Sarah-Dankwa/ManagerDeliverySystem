@@ -4,11 +4,11 @@ import java.sql.Date;
 
 public class Orders {
 
-	private int orderID;
+	private Long orderID;
 	private Date date;
 	private String address;
 
-	public Orders(int orderID, Date date, String address) {
+	public Orders(Long orderID, Date date, String address) {
 		this.orderID = orderID;
 		this.date = date;
 		this.address = address;
@@ -19,12 +19,12 @@ public class Orders {
 		this.address = address;
 	}
 
-	public Orders(int orderID, Date date) {
+	public Orders(Long orderID, Date date) {
 		this.orderID = orderID;
 		this.date = date;
 	}
 
-	public Orders(int orderID, String address) {
+	public Orders(Long orderID, String address) {
 		this.orderID = orderID;
 		this.address = address;
 	}
@@ -34,11 +34,11 @@ public class Orders {
 		return "OrderID=" + orderID + ", Date=" + date + ", Address=" + address;
 	}
 
-	public int getOrderID() {
+	public Long getOrderID() {
 		return orderID;
 	}
 
-	public void setOrderID(int orderID) {
+	public void setOrderID(Long orderID) {
 		this.orderID = orderID;
 	}
 
