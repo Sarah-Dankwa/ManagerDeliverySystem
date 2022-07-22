@@ -9,11 +9,13 @@ import org.apache.logging.log4j.Logger;
 import com.qa.domain.Driver;
 import com.qa.utility.DBUtils;
 
+import com.qa.domain.Orders;
+
 
 public class DriverDAO {
 
 	public static final Logger LOGGER = LogManager.getLogger();
-	
+	Orders order = new Orders();
 	public Driver modelFromResultSet(ResultSet resultSet) throws SQLException {
 		String firstName = resultSet.getString("first_name");
 		String surname = resultSet.getString("surname");
@@ -34,7 +36,7 @@ public class DriverDAO {
 		}
 		return null;
 	}
-	
+
 	public void update(Long driverID) {
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				PreparedStatement statement = connection
@@ -50,3 +52,4 @@ public class DriverDAO {
 	
 	
 }
+
