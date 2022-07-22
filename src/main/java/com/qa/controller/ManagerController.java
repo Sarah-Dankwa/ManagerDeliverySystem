@@ -6,6 +6,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.qa.dao.ManagerDAO;
+import com.qa.domain.Driver;
 import com.qa.domain.Orders;
 import com.qa.utility.Utils;
 
@@ -22,25 +23,42 @@ public class ManagerController {
 		this.utils = utils;
 	}
 
-	public List<Driver> readAvilableDrivers() {
+	public List<Driver> availableDrivers() {
 		List<Driver> drivers = ManagerDAO.availableDrivers();
-		for (Driver drivers : drivers) {
-			LOGGER.info(drivers);
+		for (Driver driver : drivers) {
+			LOGGER.info(driver);
 		}
 		return drivers;
 
 	}
 
-	public List<Orders> readBusyDrivers() {
-
-		return null;
-
-	}
-
-	public List<Orders> readAvilableDrivers() {
-
-		return null;
+	public List<Driver> busyDrivers() {
+		List<Driver> drivers = ManagerDAO.busyDrivers();
+		for (Driver driver : drivers) {
+			LOGGER.info(driver);
+		}
+		return drivers;
 
 	}
+
+	public List<Orders> openOrders() {
+		List<Orders> orders = ManagerDAO.openOrders();
+		for (Orders order : orders) {
+			LOGGER.info(order);
+		}
+		return orders;
+
+	}
+	
+	public List<Orders> closedOrders(){
+		List<Orders> orders = ManagerDAO.closedOrders();
+		for (Orders order : prders) {
+			LOGGER.info(order);
+		}
+		return orders;
+	}
+	
+	
+	public 
 
 }
