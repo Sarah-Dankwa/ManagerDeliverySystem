@@ -20,10 +20,12 @@ public class ManagerDAO {
 	Driver driver = new Driver();
 	public static final Logger LOGGER = LogManager.getLogger();
 
-	public void assignDriver() {
+	public void assignDriver(Long order_id, Long driver_id) {
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				PreparedStatement statement = connection
-						.prepareStatement("INSERT INTO Delivery_Orders (order_id, driver_id) " );) {	
+						.prepareStatement("INSERT INTO Delivery_Orders (order_id, driver_id) values (?, ?)" );) {
+			statement.setLong(1, order_id);
+			statement.setLong(2, driver_id);
 			statement.executeUpdate();
 		
 		} catch (Exception e) {
