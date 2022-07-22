@@ -37,4 +37,20 @@ public class DriverDAO {
 		}
 		return null;
 	}
+	
+	public Driver update(Driver driver) {
+		try (Connection connection = DBUtils.getInstance().getConnection();
+				PreparedStatement statement = connection
+						.prepareStatement("UPDATE Delivery_Orders SET deliveryDate = GETDATE, item_delivered = true WHERE id = ?");) {	
+			statement.setLong(1, Orders.getId());
+			statement.executeUpdate();
+			return read(driver.getId());
+		} catch (Exception e) {
+			LOGGER.debug(e);
+			LOGGER.error(e.getMessage());
+		}
+		return null;
+	}
+	
+	
 }

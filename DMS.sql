@@ -19,6 +19,7 @@ CREATE TABLE Delivery_Orders(
 delivery_id int not null AUTO_INCREMENT,
 order_id int not null,
 driver_id int not null,
+item_delivered boolean not null default false
 deliveryDate DATETIME,
 PRIMARY KEY (delivery_id),
 FOREIGN KEY (order_id) references Orders(order_id),
