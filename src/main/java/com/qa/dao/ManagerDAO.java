@@ -9,12 +9,13 @@ import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
 import com.qa.domain.Driver;
 import com.qa.domain.Orders;
 import com.qa.utility.DBUtils;
 
 public class ManagerDAO {
-	
+
 	DriverDAO driverDAO = new DriverDAO();
 	OrdersDAO orderDAO = new OrdersDAO();
 	Driver driver = new Driver();
@@ -23,59 +24,58 @@ public class ManagerDAO {
 	public void assignDriver(Long order_id, Long driver_id) {
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				PreparedStatement statement = connection
-						.prepareStatement("INSERT INTO Delivery_Orders (order_id, driver_id) values (?, ?)" );) {
+						.prepareStatement("INSERT INTO Delivery_Orders (order_id, driver_id) values (?, ?)");) {
 			statement.setLong(1, order_id);
 			statement.setLong(2, driver_id);
 			statement.executeUpdate();
-		
+
 		} catch (Exception e) {
 			LOGGER.debug(e);
 			LOGGER.error(e.getMessage());
 		}
-	
+
 	}
-	
-	
+
 	public List<Driver> availableDrivers() {
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				Statement statement = connection.createStatement();
-				ResultSet resultSet = statement.executeQuery("SELECT * FROM Drivers WHERE driver_busy = false");){
+				ResultSet resultSet = statement.executeQuery("SELECT * FROM Drivers WHERE driver_busy = false");) {
 			List<Driver> available = new ArrayList<>();
 			while (resultSet.next()) {
 				available.add(driverDAO.modelFromResultSet(resultSet));
 			}
-			return available;		
-			
+			return available;
+
 		} catch (Exception e) {
 			LOGGER.debug(e);
 			LOGGER.error(e.getMessage());
 		}
 		return null;
 	}
-	
+
 	public List<Driver> busyDrivers() {
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				Statement statement = connection.createStatement();
-				ResultSet resultSet = statement.executeQuery("SELECT * FROM Drivers WHERE driver_busy = true");){
+				ResultSet resultSet = statement.executeQuery("SELECT * FROM Drivers WHERE driver_busy = true");) {
 			List<Driver> available = new ArrayList<>();
 			while (resultSet.next()) {
 				available.add(driverDAO.modelFromResultSet(resultSet));
 			}
-			return available;		
-			
+			return available;
+
 		} catch (Exception e) {
 			LOGGER.debug(e);
 			LOGGER.error(e.getMessage());
 		}
 		return null;
 	}
-	
-	public List<Orders> openOrders(){
+
+	public List<Orders> openOrders() {
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				Statement statement = connection.createStatement();
-				ResultSet resultSet = statement.executeQuery("SELECT * FROM Orders WHERE order_picked = false");){
+				ResultSet resultSet = statement.executeQuery("SELECT * FROM Orders WHERE order_picked = false");) {
 			List<Orders> noDriver = new ArrayList<>();
-			while(resultSet.next()) {
+			while (resultSet.next()) {
 				noDriver.add(orderDAO.modelFromResultSet(resultSet));
 			}
 			return noDriver;
@@ -85,13 +85,13 @@ public class ManagerDAO {
 		}
 		return null;
 	}
-	
-	public List<Orders> ClosedOrders(){
+
+	public List<Orders> ClosedOrders() {
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				Statement statement = connection.createStatement();
-				ResultSet resultSet = statement.executeQuery("SELECT * FROM Orders WHERE order_picked = True");){
+				ResultSet resultSet = statement.executeQuery("SELECT * FROM Orders WHERE order_picked = True");) {
 			List<Orders> noDriver = new ArrayList<>();
-			while(resultSet.next()) {
+			while (resultSet.next()) {
 				noDriver.add(orderDAO.modelFromResultSet(resultSet));
 			}
 			return noDriver;
@@ -101,25 +101,25 @@ public class ManagerDAO {
 		}
 		return null;
 	}
-	
+
 	public void updateDriver(Long driver_id, Long order_id) {
 		try (Connection connection = DBUtils.getInstance().getConnection();
-				PreparedStatement statement = connection
-						.prepareStatement("UPDATE Delivery_Orders SET driver_id =" + driver_id + "WHERE order_id =" + order_id);) {
+				PreparedStatement statement = connection.prepareStatement(
+						"UPDATE Delivery_Orders SET driver_id =" + driver_id + "WHERE order_id =" + order_id);) {
 			statement.executeUpdate();
-		
+
 		} catch (Exception e) {
 			LOGGER.debug(e);
 			LOGGER.error(e.getMessage());
 		}
 	}
-	
+
 	public void deleteOrder(Long order_id) {
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				PreparedStatement statement = connection
 						.prepareStatement("DELETE FROM Delivery_Orders WHERE order_id =" + order_id);) {
 			statement.executeUpdate();
-		
+
 		} catch (Exception e) {
 			LOGGER.debug(e);
 			LOGGER.error(e.getMessage());

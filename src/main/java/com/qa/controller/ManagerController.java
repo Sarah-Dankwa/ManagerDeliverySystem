@@ -14,7 +14,7 @@ public class ManagerController {
 
 	public static final Logger LOGGER = LogManager.getLogger();
 
-	private ManagerDAO managerDAO;
+	ManagerDAO managerDAO = new ManagerDAO();
 	private Utils utils;
 
 	public ManagerController(ManagerDAO managerDAO, Utils utils) {
@@ -28,12 +28,12 @@ public class ManagerController {
 		Long order_id = utils.getLong();
 		LOGGER.info("Please enter Driver ID:");
 		Long driver_id = utils.getLong();
-		ManagerDAO.assignDriver(order_id, driver_id);
+		managerDAO.assignDriver(order_id, driver_id);
 		LOGGER.info("Driver assigned to delivery");
 	}
 
 	public List<Driver> availableDrivers() {
-		List<Driver> drivers = ManagerDAO.availableDrivers();
+		List<Driver> drivers = managerDAO.availableDrivers();
 		for (Driver driver : drivers) {
 			LOGGER.info(driver);
 		}
@@ -42,7 +42,7 @@ public class ManagerController {
 	}
 
 	public List<Driver> busyDrivers() {
-		List<Driver> drivers = ManagerDAO.busyDrivers();
+		List<Driver> drivers = managerDAO.busyDrivers();
 		for (Driver driver : drivers) {
 			LOGGER.info(driver);
 		}
@@ -51,7 +51,7 @@ public class ManagerController {
 	}
 
 	public List<Orders> openOrders() {
-		List<Orders> orders = ManagerDAO.openOrders();
+		List<Orders> orders = managerDAO.openOrders();
 		for (Orders order : orders) {
 			LOGGER.info(order);
 		}
@@ -60,27 +60,28 @@ public class ManagerController {
 	}
 
 	public List<Orders> closedOrders() {
-		List<Orders> orders = ManagerDAO.closedOrders();
+		List<Orders> orders = managerDAO.ClosedOrders();
 		for (Orders order : orders) {
 			LOGGER.info(order);
 		}
 		return orders;
 	}
 
-	public Driver update() {
+	public void updateDriver() {
 		LOGGER.info("Please enter the delivery ID:");
 		Long delivery_id = utils.getLong();
 		LOGGER.info("Please enter a driver ID:");
 		Long driver_id = utils.getLong();
-		blahblahblah
+		managerDAO.updateDriver(delivery_id, driver_id);
 		LOGGER.info("Delivery updated");
-		return driver;
+
 	}
 
-	public int deleteDelivery() {
+	public void deleteOrder() {
 		LOGGER.info("Please enter delivery ID:");
 		Long delivery_id = utils.getLong();
-		return managerDAO.delete(delivery_id);
+		managerDAO.deleteOrder(delivery_id);
+		LOGGER.info("Delivery deleted");
 	}
 
 }
