@@ -10,6 +10,11 @@ public class Orders {
 	
 	
 		
+	public Orders() {
+		super();
+	}
+
+
 	public Orders(Long orderID, Date date, String address) {
 		super();
 		this.orderID = orderID;

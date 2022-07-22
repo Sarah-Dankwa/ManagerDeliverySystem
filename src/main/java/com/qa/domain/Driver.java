@@ -6,6 +6,12 @@ private int driverID;
 private String firstName;
 private String surname;
 
+
+
+public Driver() {
+	super();
+}
+
 public Driver(int driverID, String firstName, String surname) {
 	this.driverID = driverID;
 	this.firstName = firstName;

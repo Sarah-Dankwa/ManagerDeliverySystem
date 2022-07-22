@@ -1,16 +1,13 @@
 package com.qa.dao;
 
 import java.sql.Connection;
-import java.sql.Driver;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import com.qa.domain.Driver;
+import com.qa.utility.DBUtils;
 
 
 public class DriverDAO {
@@ -38,18 +35,17 @@ public class DriverDAO {
 		return null;
 	}
 	
-	public Driver update(Driver driver) {
+	public void update(Long driverID) {
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				PreparedStatement statement = connection
-						.prepareStatement("UPDATE Delivery_Orders SET deliveryDate = GETDATE, item_delivered = true WHERE id = ?");) {	
-			statement.setLong(1, Orders.getId());
+						.prepareStatement("UPDATE Delivery_Orders SET deliveryDate = GETDATE, item_delivered = true WHERE id = " + driverID);) {	
 			statement.executeUpdate();
-			return read(driver.getId());
+			System.out.println("Delivery has been updated!");
 		} catch (Exception e) {
 			LOGGER.debug(e);
 			LOGGER.error(e.getMessage());
 		}
-		return null;
+		
 	}
 	
 	
