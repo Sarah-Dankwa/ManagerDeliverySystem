@@ -24,7 +24,7 @@ public class DriverDAO {
 	
 	public Driver read(Long id) {
 		try (Connection connection = DBUtils.getInstance().getConnection();
-				PreparedStatement statement = connection.prepareStatement("SELECT * FROM customers WHERE id = ?");) {
+				PreparedStatement statement = connection.prepareStatement("SELECT * FROM Drivers WHERE id = ?");) {
 			statement.setLong(1, id);
 			try (ResultSet resultSet = statement.executeQuery();) {
 				resultSet.next();
