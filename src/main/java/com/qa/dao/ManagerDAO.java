@@ -14,6 +14,7 @@ import com.qa.domain.Orders;
 import com.qa.utility.DBUtils;
 
 public class ManagerDAO {
+	
 	DriverDAO driverDAO = new DriverDAO();
 	OrdersDAO orderDAO = new OrdersDAO();
 	Driver driver = new Driver();
