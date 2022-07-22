@@ -101,4 +101,28 @@ public class ManagerDAO {
 		}
 		return null;
 	}
+	
+	public void updateDriver(Long driver_id, Long order_id) {
+		try (Connection connection = DBUtils.getInstance().getConnection();
+				PreparedStatement statement = connection
+						.prepareStatement("UPDATE Delivery_Orders SET driver_id =" + driver_id + "WHERE order_id =" + order_id);) {
+			statement.executeUpdate();
+		
+		} catch (Exception e) {
+			LOGGER.debug(e);
+			LOGGER.error(e.getMessage());
+		}
+	}
+	
+	public void deleteOrder(Long order_id) {
+		try (Connection connection = DBUtils.getInstance().getConnection();
+				PreparedStatement statement = connection
+						.prepareStatement("DELETE FROM Delivery_Orders WHERE order_id =" + order_id);) {
+			statement.executeUpdate();
+		
+		} catch (Exception e) {
+			LOGGER.debug(e);
+			LOGGER.error(e.getMessage());
+		}
+	}
 }
