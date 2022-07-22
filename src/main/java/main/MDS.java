@@ -17,14 +17,13 @@ public class MDS {
 
 	public static final Logger LOGGER = LogManager.getLogger();
 
-	private final DriverController drivers;
 	private final ManagerController managers;
 	private final Utils utils;
 
 	public MDS() {
 		this.utils = new Utils();
 		final DriverDAO drivDAO = new DriverDAO();
-		this.drivers = new DriverController(drivDAO);
+		new DriverController(drivDAO);
 		final ManagerDAO manaDAO = new ManagerDAO();
 		this.managers = new ManagerController(manaDAO, utils);
 
