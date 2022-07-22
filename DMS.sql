@@ -1,7 +1,7 @@
-CREATE DATABASE DMS;
+CREATE DATABASE IF NOT EXISTS DMS;
 Use DMS;
 
-CREATE TABLE Orders(
+CREATE TABLE IF NOT EXISTS Orders(
 order_id int not null AUTO_INCREMENT,
 dateOfOrder DATETIME,
 location varchar (50),
@@ -9,7 +9,7 @@ order_picked boolean not null default false,
 PRIMARY KEY (order_id)
 );
 
-CREATE TABLE Drivers(
+CREATE TABLE IF NOT EXISTS Drivers(
 driver_id int not null AUTO_INCREMENT,
 first_name char (40),
 surname char (40),
@@ -17,7 +17,7 @@ driver_busy boolean not null default false,
 PRIMARY KEY (driver_id)
 );
 
-CREATE TABLE Delivery_Orders(
+CREATE TABLE IF NOT EXISTS Delivery_Orders(
 delivery_id int not null AUTO_INCREMENT,
 order_id int not null,
 driver_id int not null,
